@@ -19,12 +19,25 @@
       font-size: 28px;
       margin-top: 30px;
     }
+    input {
+      font-size: 16px;
+      padding: 8px;
+      margin: 10px;
+      width: 300px;
+    }
+    select {
+      font-size: 16px;
+      padding: 8px;
+      width: 320px;
+    }
   </style>
 </head>
 <body>
 
 <h1>🎵 Hitster Bonus Questions</h1>
 
+<input type="text" id="searchInput" placeholder="Search songs..." oninput="filterSongs()">
+<br>
 <select id="songSelect"></select>
 <br>
 <button onclick="showQuestions()">Show questions</button>
@@ -35,13 +48,28 @@
 <script src="logic.js"></script>
 <script>
   const select = document.getElementById("songSelect");
+  const searchInput = document.getElementById("searchInput");
 
-  songs.forEach((s, i) => {
-    const option = document.createElement("option");
-    option.value = i;
-    option.text = `${s.artist} – ${s.title}`;
-    select.add(option);
-  });
+  function populateSelect(songList = songs) {
+    select.innerHTML = "";
+    songList.forEach((s, i) => {
+      const option = document.createElement("option");
+      option.value = songs.indexOf(s);
+      option.text = `${s.artist} – ${s.title}`;
+      select.add(option);
+    });
+  }
+
+  function filterSongs() {
+    const query = searchInput.value.toLowerCase();
+    const filtered = songs.filter(s => 
+      s.artist.toLowerCase().includes(query) || 
+      s.title.toLowerCase().includes(query)
+    );
+    populateSelect(filtered);
+  }
+
+  populateSelect();
 
   function showQuestions() {
     const song = songs[select.value];
