@@ -197,6 +197,24 @@
       transform: translateY(20px);
       animation: slideIn 0.5s ease forwards;
     }
+    .answer {
+      margin-top: 16px;
+      padding: 16px;
+      background: #2a2a2a;
+      border-radius: 8px;
+      border-left: 4px solid #4ecdc4;
+      font-size: 1rem;
+      color: #e0e0e0;
+      animation: fadeIn 0.3s ease;
+    }
+    .answers-btn {
+      background: linear-gradient(45deg, #4ecdc4, #45b7d1) !important;
+      margin-top: 20px !important;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
     .question:nth-child(2) { animation-delay: 0.1s; }
     .question:nth-child(3) { animation-delay: 0.2s; }
     .question:nth-child(4) { animation-delay: 0.3s; }
@@ -398,8 +416,32 @@
     songInfo.classList.add('show');
     
     // Show questions with animation
-    document.getElementById("questions").innerHTML =
-      qs.map(q => `<div class="question">${q}</div>`).join("");
+    const questionsHtml = qs.map((q, index) => `
+      <div class="question">
+        <div class="question-text">${q.question}</div>
+        ${q.answer ? `<div class="answer" id="answer-${index}" style="display: none;">💡 ${q.answer}</div>` : ''}
+      </div>
+    `).join("");
+    
+    const hasAnswers = qs.some(q => q.answer);
+    const answersButton = hasAnswers ? '<button onclick="toggleAnswers()" id="answersBtn" class="answers-btn">Show Answers</button>' : '';
+    
+    document.getElementById("questions").innerHTML = questionsHtml + answersButton;
+  }
+  
+  let answersVisible = false;
+  
+  function toggleAnswers() {
+    const answers = document.querySelectorAll('.answer');
+    const btn = document.getElementById('answersBtn');
+    
+    answersVisible = !answersVisible;
+    
+    answers.forEach(answer => {
+      answer.style.display = answersVisible ? 'block' : 'none';
+    });
+    
+    btn.textContent = answersVisible ? 'Hide Answers' : 'Show Answers';
   }
 </script>
 
