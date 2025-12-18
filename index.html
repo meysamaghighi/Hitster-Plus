@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hitster Bonus Questions</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 40px;
+    }
+    button {
+      font-size: 20px;
+      padding: 10px 20px;
+      margin: 10px;
+    }
+    .question {
+      font-size: 28px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🎵 Hitster Bonus Questions</h1>
+
+<select id="songSelect"></select>
+<br>
+<button onclick="showQuestions()">Show questions</button>
+
+<div id="questions"></div>
+
+<script src="songs.js"></script>
+<script src="logic.js"></script>
+<script>
+  const select = document.getElementById("songSelect");
+
+  songs.forEach((s, i) => {
+    const option = document.createElement("option");
+    option.value = i;
+    option.text = `${s.artist} – ${s.title}`;
+    select.add(option);
+  });
+
+  function showQuestions() {
+    const song = songs[select.value];
+    const qs = generateQuestions(song);
+
+    document.getElementById("questions").innerHTML =
+      qs.map(q => `<div class="question">❓ ${q}</div>`).join("");
+  }
+</script>
+
+</body>
+</html>
