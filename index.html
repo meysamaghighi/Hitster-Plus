@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Hitster Bonus Questions</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -16,6 +16,13 @@
       padding: 20px;
       margin: 0;
       min-height: 100vh;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    body.dropdown-open {
+      overflow: hidden;
     }
     .container {
       max-width: 800px;
@@ -70,6 +77,7 @@
       border-radius: 0 0 8px 8px;
       max-height: 300px;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
       z-index: 1000;
       display: none;
     }
@@ -77,10 +85,21 @@
       display: block;
     }
     .dropdown-item {
-      padding: 12px 16px;
+      padding: 16px;
       cursor: pointer;
       border-bottom: 1px solid #333;
       transition: background 0.2s ease;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      -webkit-tap-highlight-color: rgba(58, 58, 58, 0.3);
+    }
+    .artist-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      flex-shrink: 0;
     }
     .dropdown-item:hover,
     .dropdown-item.selected {
@@ -100,7 +119,7 @@
     button {
       font-size: 18px;
       font-weight: 500;
-      padding: 14px 28px;
+      padding: 16px 32px;
       margin: 20px 10px;
       background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
       border: none;
@@ -109,6 +128,9 @@
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 4px 16px rgba(255, 107, 107, 0.3);
+      min-height: 48px;
+      -webkit-tap-highlight-color: rgba(255, 107, 107, 0.3);
+      touch-action: manipulation;
     }
     button:hover {
       transform: translateY(-2px);
@@ -127,10 +149,23 @@
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.5s ease;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
     .song-info.show {
       opacity: 1;
       transform: translateY(0);
+    }
+    .song-info-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
+    .song-info-text {
+      flex: 1;
+      text-align: left;
     }
     .song-title {
       font-size: 1.5rem;
@@ -190,8 +225,22 @@
       .controls {
         padding: 1.5rem;
       }
-      input, select {
+      input {
         max-width: 100%;
+        font-size: 16px;
+      }
+      .dropdown {
+        max-height: 250px;
+      }
+      .dropdown-item {
+        padding: 18px 16px;
+        min-height: 52px;
+      }
+      button {
+        width: 100%;
+        max-width: 300px;
+        padding: 18px 32px;
+        font-size: 18px;
       }
     }
   </style>
@@ -221,6 +270,12 @@
   let selectedSong = null;
   let selectedIndex = -1;
 
+  function getArtistImage(artistName, size = 'small') {
+    const seed = encodeURIComponent(artistName.toLowerCase());
+    const dimensions = size === 'large' ? 64 : 32;
+    return `https://api.dicebear.com/7.x/initials/svg?seed=${seed}&size=${dimensions}&backgroundColor=ff6b6b,4ecdc4,45b7d1,96ceb4,feca57,ff9ff3,54a0ff&fontSize=40`;
+  }
+
   function showDropdown(songList) {
     dropdown.innerHTML = '';
     
@@ -230,17 +285,23 @@
       songList.slice(0, 10).forEach((song, index) => {
         const item = document.createElement('div');
         item.className = 'dropdown-item';
-        item.innerHTML = `<div class="song-text">${song.artist} – ${song.title}</div>`;
+        item.innerHTML = `
+          <img src="${getArtistImage(song.artist, 'small')}" alt="${song.artist}" class="artist-avatar">
+          <div class="song-text">${song.artist} – ${song.title}</div>
+        `;
         item.addEventListener('click', () => selectSong(song));
+        item.addEventListener('touchstart', () => {}, {passive: true});
         dropdown.appendChild(item);
       });
     }
     
     dropdown.classList.add('show');
+    document.body.classList.add('dropdown-open');
   }
 
   function hideDropdown() {
     dropdown.classList.remove('show');
+    document.body.classList.remove('dropdown-open');
     selectedIndex = -1;
   }
 
@@ -327,9 +388,12 @@
     // Show song info
     const songInfo = document.getElementById("songInfo");
     songInfo.innerHTML = `
-      <div class="song-title">${selectedSong.title}</div>
-      <div class="song-artist">by ${selectedSong.artist}</div>
-      <div class="song-year">${selectedSong.year}</div>
+      <img src="${getArtistImage(selectedSong.artist, 'large')}" alt="${selectedSong.artist}" class="song-info-avatar">
+      <div class="song-info-text">
+        <div class="song-title">${selectedSong.title}</div>
+        <div class="song-artist">by ${selectedSong.artist}</div>
+        <div class="song-year">${selectedSong.year}</div>
+      </div>
     `;
     songInfo.classList.add('show');
     
