@@ -1,122 +1,122 @@
 const questionBank = {
   "DeBarge|Rhythm Of The Night": [
-    "Did you know this song was written for the movie *The Last Dragon*?",
-    "Was DeBarge one of Motown’s biggest family bands of the 1980s?",
-    "Does this song mix funk, pop, and Latin-inspired rhythms?"
+    "Was DeBarge a family band with multiple siblings?",
+    "Did DeBarge have other hit songs in the 1980s?",
+    "Were the DeBarge family originally from Detroit?"
   ],
 
   "blink-182|All The Small Things": [
-    "Was this song written partly as a joke about boy band music videos?",
-    "Did the video parody Backstreet Boys and NSYNC?",
-    "Did this track help bring pop-punk into the mainstream?"
+    "Did blink-182 start as a punk band in California?",
+    "Has the band had multiple drummers over the years?",
+    "Are blink-182 known for their humorous stage antics?"
   ],
 
   "kent|Dom andra": [
-    "Is this one of Kent’s most politically interpreted songs?",
-    "Did Kent become Sweden’s biggest rock band in the early 2000s?",
-    "Was this song part of Kent’s darker, more electronic era?"
+    "Is kent considered one of Sweden's most influential rock bands?",
+    "Did kent sing exclusively in Swedish for most of their career?",
+    "Was kent formed in the 1990s?"
   ],
 
   "Arvingarna|Eloise": [
-    "Did this song win Melodifestivalen in the early 1990s?",
-    "Is Arvingarna known for blending pop with traditional Swedish dance music?",
-    "Was this a huge radio hit across Scandinavia?"
+    "Is Arvingarna a Swedish dansband group?",
+    "Have Arvingarna competed in Melodifestivalen multiple times?",
+    "Are Arvingarna still active as a band today?"
   ],
 
   "Crazy Town|Butterfly": [
-    "Did this song sample Red Hot Chili Peppers?",
-    "Was this Crazy Town’s only global mega-hit?",
-    "Did this song reach number one in multiple countries?"
+    "Was Crazy Town a rap-rock band from Los Angeles?",
+    "Did Crazy Town struggle to replicate this song's success?",
+    "Were the band members involved in other musical projects?"
   ],
 
   "Twisted Sister|We're Not Gonna Take It": [
-    "Was this song turned into an anti-authority anthem?",
-    "Did the band become famous for their outrageous music videos?",
-    "Was this song frequently protested but still hugely popular?"
+    "Was Dee Snider the lead singer of Twisted Sister?",
+    "Did Twisted Sister wear elaborate makeup and costumes?",
+    "Was the band part of the 1980s heavy metal scene?"
   ],
 
   "Brainpool|Bandstarter": [
-    "Was Brainpool part of the Swedish 90s indie-pop scene?",
-    "Did this song get heavy rotation on Swedish radio?",
-    "Was the band influenced by British pop rock?"
+    "Was Brainpool a Swedish alternative rock band?",
+    "Did Brainpool form in the early 1990s?",
+    "Were Brainpool influenced by British indie music?"
   ],
 
   "Haddaway|What Is Love - 7\" Mix": [
-    "Did this song become a club anthem in the 1990s?",
-    "Is this song strongly associated with the movie *Night at the Roxbury*?",
-    "Was Haddaway originally born in Trinidad?"
+    "Was Haddaway born in Trinidad and raised in Germany?",
+    "Did Haddaway become a one-hit wonder in many countries?",
+    "Is Haddaway's real name Nestor Alexander Haddaway?"
   ],
 
   "Diana Ross|I'm Coming Out": [
-    "Was this song written as a celebration of individuality?",
-    "Did it become a major LGBTQ+ anthem?",
-    "Was Diana Ross already a superstar from The Supremes?"
+    "Was Diana Ross the lead singer of The Supremes?",
+    "Did Diana Ross have a successful solo career after The Supremes?",
+    "Has Diana Ross won multiple Grammy Awards?"
   ],
 
   "Peter Cetera|Glory of Love": [
-    "Was this song written for *The Karate Kid Part II*?",
-    "Was Peter Cetera previously the lead singer of Chicago?",
-    "Did this song top the US charts?"
+    "Was Peter Cetera the bassist and vocalist for Chicago?",
+    "Did Peter Cetera leave Chicago to pursue a solo career?",
+    "Has Peter Cetera written songs for other artists?"
   ],
 
   "Tommy Nilsson|Öppna din dörr": [
-    "Did this song win Melodifestivalen?",
-    "Was Tommy Nilsson already popular internationally before this?",
-    "Is this considered a Swedish power ballad classic?"
+    "Is Tommy Nilsson a Swedish rock and pop singer?",
+    "Has Tommy Nilsson represented Sweden in Eurovision?",
+    "Did Tommy Nilsson start his career in the 1980s?"
   ],
 
   "Raymond & Maria|Ingen vill veta var du köpt din tröja": [
-    "Did this song become an unexpected indie hit in Sweden?",
-    "Is the title intentionally ironic and humorous?",
-    "Did it gain popularity mainly through radio play?"
+    "Are Raymond & Maria a Swedish indie pop duo?",
+    "Did the duo form in the early 2000s?",
+    "Are Raymond & Maria known for their quirky lyrics?"
   ],
 
   "John Farnham|You're the Voice": [
-    "Did this song become an anthem in Australia?",
-    "Does the song include bagpipes?",
-    "Was John Farnham already famous before this hit?"
+    "Is John Farnham considered an Australian music legend?",
+    "Did John Farnham start as a teen pop star in the 1960s?",
+    "Has John Farnham been inducted into the ARIA Hall of Fame?"
   ],
 
   "The Chainsmokers;Coldplay|Something Just Like This": [
-    "Was this Coldplay’s first major EDM collaboration?",
-    "Did the song premiere at an awards show?",
-    "Does it reference superheroes in the lyrics?"
+    "Are The Chainsmokers an American DJ duo?",
+    "Is Coldplay a British rock band formed in London?",
+    "Have both artists won multiple Grammy Awards?"
   ],
 
   "Zara Larsson;MNEK|Never Forget You": [
-    "Did this song help launch Zara Larsson internationally?",
-    "Was MNEK also the songwriter on this track?",
-    "Did it chart across Europe and the US?"
+    "Is Zara Larsson a Swedish pop singer?",
+    "Did Zara Larsson win a talent show as a child?",
+    "Is MNEK a British singer-songwriter and producer?"
   ],
 
   "PSY|Gangnam Style (강남스타일)": [
-    "Was this the first YouTube video to reach 1 billion views?",
-    "Is Gangnam a wealthy district in Seoul?",
-    "Did this song turn PSY into a global star overnight?"
+    "Is PSY a South Korean rapper and singer?",
+    "Did PSY attend university in the United States?",
+    "Has PSY released multiple albums in Korean?"
   ],
 
   "ABBA|Take A Chance On Me": [
-    "Did ABBA use a vocal loop instead of instruments at the start?",
-    "Was this song released during ABBA’s global peak?",
-    "Did it top charts in multiple countries?"
+    "Were ABBA from Sweden?",
+    "Did ABBA win Eurovision Song Contest in 1974?",
+    "Are the band members' names the source of 'ABBA'?"
   ],
 
   "Queen|Bohemian Rhapsody": [
-    "Did this song break traditional pop song structure?",
-    "Was it considered too long for radio at first?",
-    "Did it regain popularity decades later through a movie?"
+    "Was Freddie Mercury Queen's lead vocalist?",
+    "Did Queen form in London in the early 1970s?",
+    "Was Brian May Queen's guitarist and astrophysicist?"
   ],
 
   "Avicii|Wake Me Up": [
-    "Did this song blend EDM with folk and country influences?",
-    "Was it Avicii’s first global number-one hit?",
-    "Did it change how electronic music sounded on the radio?"
+    "Was Avicii a Swedish DJ and music producer?",
+    "Did Avicii help popularize EDM worldwide?",
+    "Was Avicii's real name Tim Bergling?"
   ],
 
   "Rednex|Cotton Eye Joe": [
-    "Is this song based on a traditional folk tune?",
-    "Did it mix eurodance with country imagery?",
-    "Was it a massive hit at parties and sports events?"
+    "Is Rednex a Swedish eurodance group?",
+    "Did Rednex dress in American country/western style?",
+    "Were Rednex formed in the 1990s?"
   ]
 };
 
