@@ -422,12 +422,12 @@
       return `
         <div class="question">
           <div class="question-text">${questionText}</div>
-          ${answerText ? `<div class="answer" id="answer-${index}" style="display: none;">💡 ${answerText}</div>` : ''}
+          ${answerText && answerText !== null ? `<div class="answer" id="answer-${index}" style="display: none;">💡 ${answerText}</div>` : ''}
         </div>
       `;
     }).join("");
     
-    const hasAnswers = qs.some(q => q.answer);
+    const hasAnswers = qs.some(q => q.answer && q.answer !== null);
     const answersButton = hasAnswers ? '<button onclick="toggleAnswers()" id="answersBtn" class="answers-btn">Show Answers</button>' : '';
     
     document.getElementById("questions").innerHTML = questionsHtml + answersButton;
