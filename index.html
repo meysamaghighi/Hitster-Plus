@@ -1,82 +1,341 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hitster Bonus Questions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
-      font-family: sans-serif;
-      background: #111;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
       color: #fff;
       text-align: center;
-      padding: 40px;
+      padding: 20px;
+      margin: 0;
+      min-height: 100vh;
     }
-    button {
-      font-size: 20px;
-      padding: 10px 20px;
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .controls {
+      background: #1e1e1e;
+      padding: 2rem;
+      border-radius: 16px;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .search-container {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      max-width: 400px;
       margin: 10px;
-    }
-    .question {
-      font-size: 28px;
-      margin-top: 30px;
     }
     input {
       font-size: 16px;
-      padding: 8px;
-      margin: 10px;
-      width: 300px;
+      padding: 12px 16px;
+      width: 100%;
+      background: #2a2a2a;
+      border: 2px solid #333;
+      border-radius: 8px;
+      color: #fff;
+      transition: all 0.3s ease;
     }
-    select {
-      font-size: 16px;
-      padding: 8px;
-      width: 320px;
+    input:focus {
+      outline: none;
+      border-color: #4ecdc4;
+      box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+    }
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #2a2a2a;
+      border: 2px solid #333;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      max-height: 300px;
+      overflow-y: auto;
+      z-index: 1000;
+      display: none;
+    }
+    .dropdown.show {
+      display: block;
+    }
+    .dropdown-item {
+      padding: 12px 16px;
+      cursor: pointer;
+      border-bottom: 1px solid #333;
+      transition: background 0.2s ease;
+    }
+    .dropdown-item:hover,
+    .dropdown-item.selected {
+      background: #3a3a3a;
+    }
+    .dropdown-item:last-child {
+      border-bottom: none;
+    }
+    .song-text {
+      color: #fff;
+    }
+    .no-results {
+      padding: 12px 16px;
+      color: #666;
+      font-style: italic;
+    }
+    button {
+      font-size: 18px;
+      font-weight: 500;
+      padding: 14px 28px;
+      margin: 20px 10px;
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(255, 107, 107, 0.3);
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+    }
+    button:active {
+      transform: translateY(0);
+    }
+    .song-info {
+      background: #1e1e1e;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 2rem auto;
+      max-width: 600px;
+      border-left: 4px solid #4ecdc4;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+    .song-info.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .song-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .song-artist {
+      font-size: 1.1rem;
+      color: #aaa;
+      margin-bottom: 0.5rem;
+    }
+    .song-year {
+      font-size: 1rem;
+      color: #4ecdc4;
+      font-weight: 500;
+    }
+    .question {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin: 20px auto;
+      padding: 24px;
+      background: #222;
+      border-radius: 12px;
+      border-left: 4px solid #ff6b6b;
+      max-width: 600px;
+      text-align: left;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideIn 0.5s ease forwards;
+    }
+    .question:nth-child(2) { animation-delay: 0.1s; }
+    .question:nth-child(3) { animation-delay: 0.2s; }
+    .question:nth-child(4) { animation-delay: 0.3s; }
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .empty-state {
+      color: #666;
+      font-size: 1.1rem;
+      margin: 2rem;
+      padding: 2rem;
+      background: #1a1a1a;
+      border-radius: 12px;
+      border: 2px dashed #333;
+    }
+    @media (max-width: 768px) {
+      body {
+        padding: 15px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      .controls {
+        padding: 1.5rem;
+      }
+      input, select {
+        max-width: 100%;
+      }
     }
   </style>
 </head>
 <body>
+<div class="container">
+  <h1>🎵 Hitster Bonus Questions</h1>
+  
+  <div class="controls">
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="🔍 Search and select a song..." autocomplete="off">
+      <div id="dropdown" class="dropdown"></div>
+    </div>
+    <br>
+    <button onclick="showQuestions()" id="showBtn">Show Questions</button>
+  </div>
 
-<h1>🎵 Hitster Bonus Questions</h1>
-
-<input type="text" id="searchInput" placeholder="Search songs..." oninput="filterSongs()">
-<br>
-<select id="songSelect"></select>
-<br>
-<button onclick="showQuestions()">Show questions</button>
-
-<div id="questions"></div>
+  <div id="songInfo" class="song-info"></div>
+  <div id="questions"></div>
+</div>
 
 <script src="songs.js"></script>
 <script src="logic.js"></script>
 <script>
-  const select = document.getElementById("songSelect");
   const searchInput = document.getElementById("searchInput");
+  const dropdown = document.getElementById("dropdown");
+  let selectedSong = null;
+  let selectedIndex = -1;
 
-  function populateSelect(songList = songs) {
-    select.innerHTML = "";
-    songList.forEach((s, i) => {
-      const option = document.createElement("option");
-      option.value = songs.indexOf(s);
-      option.text = `${s.artist} – ${s.title}`;
-      select.add(option);
-    });
+  function showDropdown(songList) {
+    dropdown.innerHTML = '';
+    
+    if (songList.length === 0) {
+      dropdown.innerHTML = '<div class="no-results">No songs found</div>';
+    } else {
+      songList.slice(0, 10).forEach((song, index) => {
+        const item = document.createElement('div');
+        item.className = 'dropdown-item';
+        item.innerHTML = `<div class="song-text">${song.artist} – ${song.title}</div>`;
+        item.addEventListener('click', () => selectSong(song));
+        dropdown.appendChild(item);
+      });
+    }
+    
+    dropdown.classList.add('show');
+  }
+
+  function hideDropdown() {
+    dropdown.classList.remove('show');
+    selectedIndex = -1;
+  }
+
+  function selectSong(song) {
+    selectedSong = song;
+    searchInput.value = `${song.artist} – ${song.title}`;
+    hideDropdown();
   }
 
   function filterSongs() {
     const query = searchInput.value.toLowerCase();
+    
+    if (query.length === 0) {
+      hideDropdown();
+      selectedSong = null;
+      return;
+    }
+    
     const filtered = songs.filter(s => 
       s.artist.toLowerCase().includes(query) || 
       s.title.toLowerCase().includes(query)
     );
-    populateSelect(filtered);
+    
+    showDropdown(filtered);
   }
 
-  populateSelect();
+  // Event listeners
+  searchInput.addEventListener('input', filterSongs);
+  searchInput.addEventListener('focus', () => {
+    if (searchInput.value.length > 0) {
+      filterSongs();
+    }
+  });
+  
+  // Hide dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.search-container')) {
+      hideDropdown();
+    }
+  });
+  
+  // Keyboard navigation
+  searchInput.addEventListener('keydown', (e) => {
+    const items = dropdown.querySelectorAll('.dropdown-item');
+    
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+      updateSelection(items);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      selectedIndex = Math.max(selectedIndex - 1, -1);
+      updateSelection(items);
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (selectedIndex >= 0 && items[selectedIndex]) {
+        items[selectedIndex].click();
+      } else if (selectedSong) {
+        showQuestions();
+      }
+    } else if (e.key === 'Escape') {
+      hideDropdown();
+    }
+  });
+  
+  function updateSelection(items) {
+    items.forEach((item, index) => {
+      item.classList.toggle('selected', index === selectedIndex);
+    });
+  }
+  
+  // Hide song info initially
+  document.getElementById("songInfo").classList.remove('show');
 
   function showQuestions() {
-    const song = songs[select.value];
-    const qs = generateQuestions(song);
-
+    if (!selectedSong) {
+      document.getElementById("questions").innerHTML = 
+        '<div class="empty-state">Please search and select a song first! 🎵</div>';
+      return;
+    }
+    
+    const qs = generateQuestions(selectedSong);
+    
+    // Show song info
+    const songInfo = document.getElementById("songInfo");
+    songInfo.innerHTML = `
+      <div class="song-title">${selectedSong.title}</div>
+      <div class="song-artist">by ${selectedSong.artist}</div>
+      <div class="song-year">${selectedSong.year}</div>
+    `;
+    songInfo.classList.add('show');
+    
+    // Show questions with animation
     document.getElementById("questions").innerHTML =
-      qs.map(q => `<div class="question">❓ ${q}</div>`).join("");
+      qs.map(q => `<div class="question">${q}</div>`).join("");
   }
 </script>
 
